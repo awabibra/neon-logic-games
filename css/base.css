@@ -1,17 +1,18 @@
-/* vars and reset */
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=DM+Sans:wght@400;500&display=swap');
+/* ===========================
+   base.css — design system
+=========================== */
 
 :root {
-  --color-bg: #0a0a0f;
-  --color-surface: #12121a;
-  --color-accent: #ff6b35;
-  --color-text: #ffffff;
-  --color-muted: #9494a0;
-  
-  --font-display: 'Orbitron', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-  --radius: 6px;
-  --radius-lg: 12px;
+  --color-bg:       #0f0f1a;
+  --color-surface:  #1a1a2e;
+  --color-text:     #e8e8f0;
+  --color-muted:    #9090a8;
+  --color-accent:   #ff6b35;
+  --color-accent2:  #00d4ff;
+  --font-display:   'Orbitron', sans-serif;
+  --font-body:      'DM Sans', sans-serif;
+  --radius:         8px;
+  --radius-lg:      14px;
 }
 
 *, *::before, *::after {
@@ -20,9 +21,29 @@
   padding: 0;
 }
 
+html { scroll-behavior: smooth; }
+
 body {
-  background-color: var(--color-bg);
+  background: var(--color-bg);
   color: var(--color-text);
   font-family: var(--font-body);
-  line-height: 1.6;
+  font-size: 16px;
+  line-height: 1.7;
 }
+
+:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+a { color: var(--color-accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+img { max-width: 100%; display: block; }
