@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Speed Skater – Neon-Logic Games</title>
+  <meta name="description" content="Speed Skater – der rasante Endless-Runner für iOS und Android von Neon-Logic Games GmbH Wien." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+    :root {
+      --color-bg: #0f0f1a;
+      --color-accent: #ff6b35;
+      --color-text: #ffffff;
+      --color-muted: rgba(255,255,255,0.45);
+      --color-border: rgba(255,255,255,0.08);
+    }
+ 
+    html { scroll-behavior: smooth; }
+ 
+    body {
+      background-color: #0f0f1a;
+      color: #ffffff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+ 
+    a { color: inherit; text-decoration: none; }
+ 
+    /* NAV */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: rgba(15,15,26,0.92);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+ 
+    .nav-logo {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+ 
+    .nav-logo .accent { color: #ff6b35; }
+ 
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+ 
+    .nav-links a {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.45);
+      transition: color 0.2s;
+    }
+ 
+    .nav-links a:hover { color: #ff6b35; }
+ 
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 8rem 2rem 5rem;
+      position: relative;
+      overflow: hidden;
+      background-color: #0f0f1a;
+    }
+ 
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,107,53,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,107,53,0.07) 1px, transparent 1px);
+      background-size: 60px 60px;
+      animation: gridMove 10s linear infinite;
+      z-index: 0;
+    }
+ 
+    .hero-glow {
+      position: absolute;
+      top: 35%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(255,107,53,0.14) 0%, transparent 65%);
+      border-radius: 50%;
+      z-index: 0;
+      animation: glowPulse 5s ease-in-out infinite;
+    }
+ 
+    @keyframes gridMove {
+      from { background-position: 0 0; }
+      to   { background-position: 0 60px; }
+    }
+ 
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%, -50%) scale(1.1); }
+    }
+ 
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+ 
+    .hero-badge {
+      display: inline-block;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ff6b35;
+      border: 1px solid rgba(255,107,53,0.35);
+      padding: 0.4rem 1.2rem;
+      border-radius: 2rem;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.7s ease both;
+    }
+ 
+    .hero-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      animation: fadeUp 0.7s 0.1s ease both;
+    }
+ 
+    .hero-title-line2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(4.5rem, 12vw, 9rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: #ff6b35;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+      display: block;
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+ 
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.5);
+      max-width: 500px;
+      line-height: 1.8;
+      margin-bottom: 2.5rem;
+      animation: fadeUp 0.7s 0.2s ease both;
+    }
+ 
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 0.7s 0.25s ease both;
+    }
+ 
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #ff6b35;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+ 
+    .btn-primary:hover {
+      background: #e8520f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,107,53,0.4);
+    }
+ 
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem 2.2rem;
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.15);
+      transition: border-color 0.2s, color 0.2s, transform 0.15s;
+    }
+ 
+    .btn-ghost:hover {
+      border-color: #ff6b35;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+ 
+    /* STATS */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid rgba(255,255,255,0.08);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      background-color: #0f0f1a;
+    }
+ 
+    .stat {
+      text-align: center;
+      padding: 3rem 1rem;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+ 
+    .stat:last-child { border-right: none; }
+ 
+    .stat-number {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 900;
+      color: #ff6b35;
+      display: block;
+      line-height: 1;
+      margin-bottom: 0.6rem;
+    }
+ 
+    .stat-label {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.32);
+    }
+ 
+    /* FEATURES */
+    .features-wrap {
+      padding: 7rem 3rem;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #0f0f1a;
+    }
+ 
+    .section-eyebrow {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ff6b35;
+      display: block;
+      margin-bottom: 1rem;
+    }
+ 
+    .section-title {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900;
+      color: #fff;
+      text-transform: uppercase;
+      line-height: 1.05;
+      margin-bottom: 1.2rem;
+    }
+ 
+    .section-desc {
+      font-size: 1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.42);
+      max-width: 560px;
+      line-height: 1.8;
+      margin-bottom: 4rem;
+    }
+ 
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.08);
+      width: 100%;
+    }
+ 
+    .feature-card {
+      background: #0f0f1a;
+      padding: 2.5rem 2rem;
+      transition: background 0.25s;
+    }
+ 
+    .feature-card:hover { background: rgba(255,107,53,0.05); }
+ 
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1.2rem;
+      display: block;
+      line-height: 1;
+    }
+ 
+    .feature-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.7rem;
+    }
+ 
+    .feature-desc {
+      font-size: 0.875rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.4);
+      line-height: 1.75;
+    }
+ 
+    /* PRICING */
+    .pricing-wrap {
+      padding: 7rem 3rem;
+      display: flex;
+      justify-content: center;
+      background: linear-gradient(180deg, #0f0f1a 0%, rgba(255,107,53,0.05) 50%, #0f0f1a 100%);
+    }
+ 
+    .pricing-card {
+      border: 1px solid rgba(255,107,53,0.3);
+      padding: 3.5rem;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      background: rgba(255,107,53,0.02);
+    }
+ 
+    .pricing-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: #ff6b35;
+    }
+ 
+    .pricing-eyebrow {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #ff6b35;
+      display: block;
+      margin-bottom: 1.2rem;
+    }
+ 
+    .pricing-amount {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 4.5rem;
+      font-weight: 900;
+      color: #fff;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+ 
+    .pricing-note {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.32);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+ 
+    .pricing-divider {
+      border: none;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 2rem;
+    }
+ 
+    .pricing-list {
+      list-style: none;
+      margin-bottom: 2.5rem;
+    }
+ 
+    .pricing-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.6);
+      padding: 0.65rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+ 
+    .pricing-list li:last-child { border-bottom: none; }
+ 
+    .pricing-check {
+      color: #ff6b35;
+      font-size: 0.8rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 0.15rem;
+    }
+ 
+    .btn-full {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      width: 100%;
+      background: #ff6b35;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1.1rem 2rem;
+      border-radius: 3px;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    }
+ 
+    .btn-full:hover {
+      background: #e8520f;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255,107,53,0.4);
+    }
+ 
+    /* FOOTER */
+    .footer-inner {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2.5rem 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      background-color: #0f0f1a;
+    }
+ 
+    .footer-copy {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.22);
+      font-weight: 300;
+    }
+ 
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+ 
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.28);
+      transition: color 0.2s;
+      font-weight: 300;
+    }
+ 
+    .footer-links a:hover { color: #ff6b35; }
+ 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+ 
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      .features-grid { grid-template-columns: repeat(2, 1fr); }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .stat:nth-child(2) { border-right: none; }
+      .stat:nth-child(3) { border-top: 1px solid rgba(255,255,255,0.08); }
+      .stat:nth-child(4) { border-top: 1px solid rgba(255,255,255,0.08); border-right: none; }
+      .nav { padding: 1rem 1.5rem; }
+      .features-wrap { padding: 5rem 1.5rem; }
+    }
+ 
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .features-grid { grid-template-columns: 1fr; }
+      .hero-title, .hero-title-line2 { font-size: clamp(3rem, 16vw, 5rem); }
+      .features-wrap { padding: 4rem 1.25rem; }
+      .pricing-card { padding: 2.5rem 1.5rem; }
+      .footer-inner { padding: 2rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+ 
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="index.html" class="nav-logo">Neon<span class="accent">-</span>Logic <span class="accent">Games</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="about.html">Über uns</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+    </ul>
+  </nav>
+ 
+  <main>
+ 
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-grid" aria-hidden="true"></div>
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-content">
+        <span class="hero-badge">iOS &amp; Android · Endless Runner</span>
+        <h1 class="hero-title" id="hero-title">Speed</h1>
+        <span class="hero-title-line2" aria-hidden="true">Skater</span>
+        <p class="hero-sub">
+          Renne, weiche aus, überlebe. Der rasanteste Endless-Runner auf dem Eis —
+          entwickelt von Neon-Logic Games in Wien.
+        </p>
+        <div class="hero-actions">
+          <a href="contact.html" class="btn-primary">▸&nbsp; Aktivierungscode kaufen</a>
+          <a href="about.html" class="btn-ghost">Mehr erfahren</a>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- Stats -->
+    <div class="stats" role="region" aria-label="Spielübersicht">
+      <div class="stat">
+        <span class="stat-number">∞</span>
+        <span class="stat-label">Levels</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">€2,99</span>
+        <span class="stat-label">Aktivierungscode</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">iOS+</span>
+        <span class="stat-label">Android</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">Wien</span>
+        <span class="stat-label">Made in Austria</span>
+      </div>
+    </div>
+ 
+    <!-- Features -->
+    <section class="features-wrap" aria-labelledby="features-title">
+      <span class="section-eyebrow">Spielfeatures</span>
+      <h2 class="section-title" id="features-title">Was Speed Skater bietet</h2>
+      <p class="section-desc">
+        Höchstgeschwindigkeit, präzise Steuerung und ein Soundtrack, der dich antreibt —
+        Speed Skater liefert pures Spielgefühl ohne Werbung oder Unterbrechungen.
+      </p>
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="feature-icon" aria-hidden="true">⚡</span>
+          <h3 class="feature-name">Endlose Geschwindigkeit</h3>
+          <p class="feature-desc">Je länger du überlebst, desto schneller wird die Bahn. Kein Nachlassen, keine Gnade.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon" aria-hidden="true">🎮</span>
+          <h3 class="feature-name">Präzise Steuerung</h3>
+          <p class="feature-desc">Optimiert für Touch — reagiert auf jede Berührung sofort und ohne Verzögerung.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon" aria-hidden="true">🏆</span>
+          <h3 class="feature-name">Globale Bestenliste</h3>
+          <p class="feature-desc">Miss dich mit Spielern weltweit. Dein Highscore zählt — und wird gespeichert.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon" aria-hidden="true">🚫</span>
+          <h3 class="feature-name">Keine Werbung</h3>
+          <p class="feature-desc">Einmal kaufen, für immer spielen. Kein Abo, keine In-App-Käufe, keine Unterbrechungen.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon" aria-hidden="true">🎵</span>
+          <h3 class="feature-name">Dynamischer Soundtrack</h3>
+          <p class="feature-desc">Elektronische Beats, die sich dem Spieltempo anpassen und dich im Flow halten.</p>
+        </div>
+        <div class="feature-card">
+          <span class="feature-icon" aria-hidden="true">📱</span>
+          <h3 class="feature-name">iOS &amp; Android</h3>
+          <p class="feature-desc">Plattformübergreifend. Ein Code, ein Spielstand — auf jedem Gerät verfügbar.</p>
+        </div>
+      </div>
+    </section>
+ 
+    <!-- Pricing -->
+    <section class="pricing-wrap" aria-labelledby="pricing-title">
+      <div class="pricing-card">
+        <span class="pricing-eyebrow">Aktivierungscode</span>
+        <div class="pricing-amount" id="pricing-title">€2,99</div>
+        <p class="pricing-note">Einmalige Zahlung · kein Abo · kein Ablaufdatum</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-list">
+          <li><span class="pricing-check">✓</span> Vollzugang zu allen Features</li>
+          <li><span class="pricing-check">✓</span> Keine Werbung, keine Zusatzkosten</li>
+          <li><span class="pricing-check">✓</span> iOS und Android inklusive</li>
+          <li><span class="pricing-check">✓</span> Sofortiger Download nach Kauf</li>
+          <li><span class="pricing-check">✓</span> Globale Bestenliste freigeschaltet</li>
+        </ul>
+        <a href="contact.html" class="btn-full">▸&nbsp; Code jetzt kaufen</a>
+      </div>
+    </section>
+ 
+  </main>
+ 
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 Neon-Logic Games GmbH, Wien. Alle Rechte vorbehalten.</span>
+      <nav class="footer-links" aria-label="Footer-Navigation">
+        <a href="impressum.html">Impressum</a>
+        <a href="privacy.html">Datenschutz</a>
+        <a href="license.html">Lizenz</a>
+        <a href="accessibility.html">Barrierefreiheit</a>
+        <a href="contact.html">Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+ 
+</body>
+</html>
