@@ -43,7 +43,7 @@ Dies ist ein adrenalingeladenes Spiel, in dem ein einzelner Spieler versucht, di
 **Firmenbuchgericht:** Handelsgericht Wien  
 **UID-Nummer:** ATU12345678  
 **E-Mail:** office@neon-logic.at  
-**Telefon:** +43 1 234 5678
+**Telefon:** +43 1 58801 4190
 
 Unser Ziel ist es, die Freude, die wir beim Schaffen finden, zu teilen und den Menschen ein wenig Glück im Alltag zu bringen.
 
