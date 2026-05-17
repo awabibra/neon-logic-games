@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Neon-Logic Games</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background-color: #0f0f1a; color: #fff; font-family: 'DM Sans', sans-serif; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    .nav { position: fixed; top: 0; left: 0; right: 0; z-index: 999; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; background: rgba(15,15,26,0.92); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .nav-logo { font-family: 'Orbitron', sans-serif; font-size: 0.85rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+    .nav-logo .accent { color: #ff6b35; }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a { font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.45); transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: #ff6b35; }
+
+    .page-header { padding: 12rem 3rem 6rem; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .eyebrow { font-family: 'Orbitron', sans-serif; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: #ff6b35; display: block; margin-bottom: 1rem; }
+    .page-title { font-family: 'Orbitron', sans-serif; font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; text-transform: uppercase; line-height: 1; color: #fff; }
+
+    .content { max-width: 1200px; margin: 0 auto; padding: 6rem 3rem; display: grid; grid-template-columns: 1fr 1.4fr; gap: 6rem; }
+
+    .contact-info h2 { font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #fff; margin-bottom: 1.5rem; }
+    .info-block { margin-bottom: 2.5rem; }
+    .info-label { font-family: 'Orbitron', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: #ff6b35; display: block; margin-bottom: 0.5rem; }
+    .info-value { font-size: 0.92rem; font-weight: 300; color: rgba(255,255,255,0.55); line-height: 1.8; }
+    .info-value a { color: rgba(255,255,255,0.55); border-bottom: 1px solid rgba(255,107,53,0.3); transition: color 0.2s; }
+    .info-value a:hover { color: #ff6b35; }
+
+    .form-wrap { }
+    .form-wrap h2 { font-family: 'Orbitron', sans-serif; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: #fff; margin-bottom: 2rem; }
+
+    .field { margin-bottom: 1.5rem; }
+    .field label { font-family: 'Orbitron', sans-serif; font-size: 0.58rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.4); display: block; margin-bottom: 0.6rem; }
+    .field input, .field select, .field textarea {
+      width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+      color: #fff; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 300;
+      padding: 0.9rem 1rem; border-radius: 3px; outline: none; transition: border-color 0.2s;
+      appearance: none;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color: #ff6b35; }
+    .field textarea { resize: vertical; min-height: 140px; }
+    .field select option { background: #1a1a2e; color: #fff; }
+
+    .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    .btn-submit {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: #ff6b35; color: #fff;
+      font-family: 'Orbitron', sans-serif; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 1rem 2.2rem; border-radius: 3px; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      margin-top: 0.5rem;
+    }
+    .btn-submit:hover { background: #e8520f; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(255,107,53,0.4); }
+
+    .footer-inner { border-top: 1px solid rgba(255,255,255,0.08); padding: 2.5rem 3rem; display: flex; flex-wrap: wrap; gap: 1.5rem; align-items: center; justify-content: space-between; max-width: 1200px; margin: 0 auto; }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.22); font-weight: 300; }
+    .footer-links { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.28); transition: color 0.2s; }
+    .footer-links a:hover { color: #ff6b35; }
+
+    @media (max-width: 900px) {
+      .content { grid-template-columns: 1fr; gap: 3rem; }
+      .nav { padding: 1rem 1.5rem; }
+      .page-header, .content { padding-left: 1.5rem; padding-right: 1.5rem; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .page-header { padding-top: 8rem; padding-bottom: 3rem; }
+      .field-row { grid-template-columns: 1fr; }
+      .footer-inner { padding: 2rem 1.25rem; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav" aria-label="Hauptnavigation">
+    <a href="index.html" class="nav-logo">Neon<span class="accent">-</span>Logic <span class="accent">Games</span></a>
+    <ul class="nav-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="about.html">Über uns</a></li>
+      <li><a href="contact.html" class="active">Kontakt</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="page-header">
+      <span class="eyebrow">Kontakt</span>
+      <h1 class="page-title">Schreib uns</h1>
+    </div>
+
+    <div class="content">
+
+      <div class="contact-info">
+        <h2>Direktkontakt</h2>
+
+        <div class="info-block">
+          <span class="info-label">E-Mail</span>
+          <div class="info-value"><a href="mailto:office@neon-logic.games">office@neon-logic.games</a></div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-label">Telefon</span>
+          <div class="info-value">+43 1 234 5678<br /><small style="color:rgba(255,255,255,0.3);">Mo–Fr, 9:00–17:00 Uhr</small></div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-label">Adresse</span>
+          <div class="info-value">
+            Neon-Logic Games GmbH<br />
+            Musterstraße 12<br />
+            1010 Wien, Österreich
+          </div>
+        </div>
+
+        <div class="info-block">
+          <span class="info-label">Aktivierungscode</span>
+          <div class="info-value">Für den Kauf deines Speed Skater Aktivierungscodes (€ 2,99) nutze das Kontaktformular oder schreib direkt an unsere E-Mail-Adresse.</div>
+        </div>
+      </div>
+
+      <div class="form-wrap">
+        <h2>Kontaktformular</h2>
+        <form action="#" method="post" novalidate>
+          <div class="field-row">
+            <div class="field">
+              <label for="vorname">Vorname</label>
+              <input type="text" id="vorname" name="vorname" placeholder="Max" required />
+            </div>
+            <div class="field">
+              <label for="nachname">Nachname</label>
+              <input type="text" id="nachname" name="nachname" placeholder="Mustermann" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="email">E-Mail-Adresse</label>
+            <input type="email" id="email" name="email" placeholder="max@beispiel.at" required />
+          </div>
+          <div class="field">
+            <label for="betreff">Betreff</label>
+            <select id="betreff" name="betreff">
+              <option value="code">Aktivierungscode kaufen</option>
+              <option value="support">Technischer Support</option>
+              <option value="presse">Presse &amp; Kooperationen</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="nachricht">Nachricht</label>
+            <textarea id="nachricht" name="nachricht" placeholder="Deine Nachricht..." required></textarea>
+          </div>
+          <button type="submit" class="btn-submit">▸&nbsp; Nachricht senden</button>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <span class="footer-copy">© 2025 Neon-Logic Games GmbH, Wien. Alle Rechte vorbehalten.</span>
+      <nav class="footer-links" aria-label="Footer-Navigation">
+        <a href="impressum.html">Impressum</a>
+        <a href="privacy.html">Datenschutz</a>
+        <a href="license.html">Lizenz</a>
+        <a href="accessibility.html">Barrierefreiheit</a>
+        <a href="contact.html">Kontakt</a>
+      </nav>
+    </div>
+  </footer>
+
+</body>
+</html>
