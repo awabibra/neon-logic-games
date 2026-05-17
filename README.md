@@ -60,6 +60,8 @@ Unser Ziel ist es, die Freude, die wir beim Schaffen finden, zu teilen und den M
 
 ## Projektstruktur
 
+## Projektstruktur
+
 neon-logic-games/
 ├── index.html          ← Homepage & Shop
 ├── about.html          ← Über uns & Marken (Aufgabe 3)
@@ -69,12 +71,16 @@ neon-logic-games/
 ├── contact.html        ← Kontaktseite (Aufgabe 6)
 ├── accessibility.html  ← Barrierefreiheitserklärung (Aufgabe 1)
 ├── css/
+│   └── style.css       ← Konsolidiertes Stylesheet (Refactored für Ladeeffizienz)
 ├── js/
 ├── img/
 ├── audio/
 ├── fonts/
 ├── CREDITS.md          ← Mediennachweise (Aufgabe 2)
 └── README.md           ← Projektdokumentation (Aufgabe 0)
+
+### Hinweis zum CSS-Refactoring
+Im Zuge der Entwicklungsphase wurden die ursprünglich getrennten Entwurfsdateien `base.css`, `layout.css` und `components.css` in ein einziges, zentrales Stylesheet `css/style.css` konsolidiert. Diese Maßnahme verringert die Anzahl der parallelen HTTP-Anfragen beim Laden der Unterseiten, bereinigt redundante Selektoren-Aufrufe und sorgt für eine saubere Code-Strukturierung passend zum finalen Release des Webshops.
 
 ---
 
