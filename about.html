@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Über uns - Neon-Logic Games</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: #0f0f1a;
+            color: #ffffff;
+            font-family: 'DM Sans', sans-serif;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            background: rgba(15, 15, 26, 0.92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+        }
+
+        .nav-logo span {
+            color: #ff6b35;
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+        }
+
+        nav ul li a {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: rgba(255,255,255,0.5);
+            font-weight: 700;
+        }
+
+        nav ul li a:hover {
+            color: #ff6b35;
+        }
+
+        nav ul li a.active {
+            color: #ff6b35;
+        }
+
+        .page-header {
+            padding: 10rem 2rem 4rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        .eyebrow {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.62rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #ff6b35;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 5vw, 4rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            line-height: 1.05;
+        }
+
+        .content {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .intro-grid h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1rem;
+        }
+
+        .intro-grid p {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 0.7rem;
+        }
+
+        .values-section {
+            margin-bottom: 4rem;
+        }
+
+        .section-heading {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.2rem, 2.5vw, 2rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            border: 1px solid rgba(255,255,255,0.07);
+            gap: 1px;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .value-card {
+            background: #0f0f1a;
+            padding: 2rem 1.5rem;
+        }
+
+        .value-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: rgba(255, 107, 53, 0.12);
+            display: block;
+            margin-bottom: 0.8rem;
+        }
+
+        .value-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .value-text {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.4);
+            line-height: 1.7;
+        }
+
+        .brands-section {
+            margin-bottom: 4rem;
+            padding-bottom: 4rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .brands-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .brand-card {
+            border: 1px solid rgba(255,255,255,0.08);
+            padding: 2rem 1.8rem;
+        }
+
+        .brand-type {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: #ff6b35;
+            border: 1px solid rgba(255,107,53,0.3);
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 1.5rem;
+        }
+
+        .brand-visual {
+            margin-bottom: 1.2rem;
+            height: 64px;
+            display: flex;
+            align-items: center;
+        }
+
+        .wordmark-text {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: #fff;
+        }
+
+        .wordmark-text span {
+            color: #ff6b35;
+        }
+
+        .brand-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .brand-description {
+            font-size: 0.88rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.42);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .nizza-label {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.22);
+        }
+
+        .nizza-label span {
+            color: rgba(255, 107, 53, 0.6);
+        }
+
+        .nizza-section {
+            margin-bottom: 4rem;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-size: 0.88rem;
+        }
+
+        th {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.58rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.3);
+            text-align: left;
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.07);
+        }
+
+        td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.04);
+            color: rgba(255,255,255,0.48);
+            font-weight: 300;
+            vertical-align: top;
+            line-height: 1.6;
+        }
+
+        td:first-child {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: #ff6b35;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .team-section { margin-bottom: 2rem; }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.07);
+            margin-top: 1.5rem;
+        }
+
+        .team-card {
+            background: #0f0f1a;
+            padding: 1.8rem;
+        }
+
+        .team-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(255,107,53,0.1);
+            border: 1px solid rgba(255,107,53,0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 900;
+            color: #ff6b35;
+            margin-bottom: 0.8rem;
+        }
+
+        .team-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .team-role {
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.3);
+            font-weight: 300;
+        }
+
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.07);
+            padding: 2rem;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-copy {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.22);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.28);
+        }
+
+        .footer-links a:hover {
+            color: #ff6b35;
+        }
+
+        @media (max-width: 850px) {
+            .intro-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .brands-grid { grid-template-columns: 1fr; }
+            .values-grid { grid-template-columns: 1fr 1fr; }
+            .team-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 550px) {
+            nav ul { display: none; }
+            .values-grid { grid-template-columns: 1fr; }
+            .team-grid { grid-template-columns: 1fr; }
+            .page-header { padding-top: 7rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html" class="nav-logo">Neon<span>-</span>Logic <span>Games</span></a>
+    <ul>
+        <li><a href="index.html">Start</a></li>
+        <li><a href="about.html" class="active">Über uns</a></li>
+        <li><a href="contact.html">Kontakt</a></li>
+        <li><a href="impressum.html">Impressum</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="page-header">
+        <span class="eyebrow">Unternehmen</span>
+        <h1>Über Neon-Logic Games</h1>
+    </div>
+
+    <div class="content">
+
+        <div class="intro-grid">
+            <div>
+                <h2>Wer wir sind</h2>
+                <p>Die Neon-Logic Games GmbH ist ein kleines, unabhängiges Spielestudio mit Sitz in Wien, gegründet 2026. Unser Team besteht aus drei Personen und unser erstes Produkt ist Speed ​​Skater, ein mobiler Endless Runner für iOS und Android. Unser Büro befindet sich in der Musterstraße 12, 1010 Wien.</p>
+            </div>
+            <div>
+                <h2>Unsere Mission</h2>
+                <p>Wir haben dieses Unternehmen gegründet, weil wir genug hatten von Handyspielen voller Werbung, Abo-Angeboten und manipulativer Spielmechaniken. Unser Ziel ist einfach: ein gutes Spiel entwickeln, es einmalig zu einem fairen Preis verkaufen und den Spielern ungestörten Spielspaß ermöglichen.</p>
+            </div>
+        </div>
+
+        <div class="values-section">
+            <span class="eyebrow">Grundsätze</span>
+            <h2 class="section-heading">Was uns antreibt</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <span class="value-number">01</span>
+                    <div class="value-title">Fair Play</div>
+                    <p class="value-text">Wir haben genug von Spielen, die ständig nach Geld betteln. Für uns bedeutet „Fair Play“: keine lästigen In-App-Käufe, keine Paywalls und keine Tricks, mit denen man süchtig gemacht werden soll. Einmal zahlen, das komplette Spiel erhalten – fertig. Wir wollen, dass ihr euch einfach nur auf den Spielspaß konzentriert.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-number">02</span>
+                    <div class="value-title">Datenschutz</div>
+                    <p class="value-text">Deine Daten gehen uns nichts an. Viele Apps zeichnen alles auf, was du tust, aber wir finden das schrecklich. Wir erfassen deine Daten nicht, verkaufen sie nicht an Dritte und du brauchst nicht einmal ein Konto, um zu spielen. Wir behandeln alles absolut vertraulich und transparent.</p>
+                </div>
+                <div class="value-card">
+                    <span class="value-number">03</span>
+                    <div class="value-title">Made in Wien</div>
+                    <p class="value-text">Wir sind ein kleines Entwicklerteam direkt hier in Wien. Für uns bedeutet „Made in Wien“ saubere Softwareentwicklung, faire Arbeitsbedingungen und Herzblut in unsere Projekte. Wir wollen zeigen, dass erstklassige Spiele direkt aus Österreich kommen und die internationale Indie-Szene aufmischen können.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="brands-section">
+            <span class="eyebrow">Aufgabe 3 - Marke</span>
+            <h2 class="section-heading">Unsere Markenformen</h2>
+
+            <div class="brands-grid">
+
+                <div class="brand-card">
+                    <span class="brand-type">Wortmarke</span>
+                    <div class="brand-visual">
+                        <div class="wordmark-text">Speed<span> Skater</span></div>
+                    </div>
+                    <div class="brand-title">"Speed Skater"</div>
+                    <p class="brand-description">Wir haben den Namen Speed ​​Skater gewählt, weil er das Spiel direkt beschreibt. Die englische Bezeichnung war eine bewusste Entscheidung, um ein jüngeres, internationales Publikum anzusprechen.</p>
+                    <div class="nizza-label">Nizza-Klasse <span>41</span> - Unterhaltung, Spiele</div>
+                </div>
+
+                <div class="brand-card">
+                    <span class="brand-type">Bildmarke</span>
+                    <div class="brand-visual">
+                        <svg width="56" height="56" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Blitz-Symbol der Bildmarke">
+                            <polygon points="36,4 14,36 30,36 28,60 50,28 34,28" fill="#ff6b35" opacity="0.85"/>
+                            <polygon points="36,4 14,36 30,36 28,60 50,28 34,28" fill="none" stroke="#ff6b35" stroke-width="1.5" opacity="0.3"/>
+                        </svg>
+                    </div>
+                    <div class="brand-title">Blitz-Symbol</div>
+                    <p class="brand-description">Der Blitz symbolisiert die Kernmechanik des Spiels: die stetig steigende Geschwindigkeit. Er ist ein allgemein bekanntes Symbol für Energie und schnelle Reaktionen und passt daher hervorragend zum Spiel.</p>
+                    <div class="nizza-label">Nizza-Klasse <span>41</span> - Unterhaltung · Klasse <span>42</span> - Software</div>
+                </div>
+
+                <div class="brand-card">
+                    <span class="brand-type">Formmarke</span>
+                    <div class="brand-visual">
+                        <svg width="60" height="60" viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Hexagon-Formmarke">
+                            <polygon points="36,4 64,20 64,52 36,68 8,52 8,20" fill="rgba(255,107,53,0.07)" stroke="#ff6b35" stroke-width="1.5"/>
+                            <polygon points="36,16 52,25 52,47 36,56 20,47 20,25" fill="rgba(255,107,53,0.1)" stroke="rgba(255,107,53,0.3)" stroke-width="1"/>
+                            <circle cx="36" cy="36" r="5" fill="#ff6b35" opacity="0.75"/>
+                        </svg>
+                    </div>
+                    <div class="brand-title">Hexagon-Form</div>
+                    <p class="brand-description">Die Sechseckform symbolisiert die technische Seite unseres Unternehmens als Softwareentwickler. Die übereinander angeordneten Sechsecke unterstreichen die moderne und dynamische Ausstrahlung, die wir vermitteln möchten.</p>
+                    <div class="nizza-label">Nizza-Klasse <span>9</span> - Software · Klasse <span>41</span> - Unterhaltung</div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="nizza-section">
+            <span class="eyebrow">Markenrecht</span>
+            <h2 class="section-heading">Nizza-Klassifikation</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Klasse</th>
+                        <th>Beschreibung</th>
+                        <th>Relevanz</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Klasse 9</td>
+                        <td>Software, Apps, digitale Inhalte, herunterladbare Computerspiele</td>
+                        <td>Speed Skater als herunterladbare App für iOS und Android</td>
+                    </tr>
+                    <tr>
+                        <td>Klasse 41</td>
+                        <td>Unterhaltung, Bereitstellung von Online-Spielen, Organisation von Spielwettbewerben</td>
+                        <td>Globale Bestenliste und tägliche Challenges im Spiel</td>
+                    </tr>
+                    <tr>
+                        <td>Klasse 42</td>
+                        <td>Softwareentwicklung, Design und Entwicklung von Computerprogrammen</td>
+                        <td>Entwicklungsdienstleistungen von Neon-Logic Games GmbH</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="team-section">
+            <span class="eyebrow">Team</span>
+            <h2 class="section-heading">Die Menschen dahinter</h2>
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="team-avatar">ND</div>
+                    <div class="team-name">Nina Decker</div>
+                    <div class="team-role">CEO &amp; Game Design</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">MK</div>
+                    <div class="team-name">Markus Kern</div>
+                    <div class="team-role">Lead Developer</div>
+                </div>
+                <div class="team-card">
+                    <div class="team-avatar">SL</div>
+                    <div class="team-name">Sara Leitner</div>
+                    <div class="team-role">Art &amp; Sound</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© 2025 Neon-Logic Games GmbH, Wien. Alle Rechte vorbehalten.</span>
+        <nav class="footer-links">
+            <a href="impressum.html">Impressum</a>
+            <a href="privacy.html">Datenschutz</a>
+            <a href="license.html">Lizenz</a>
+            <a href="accessibility.html">Barrierefreiheit</a>
+            <a href="contact.html">Kontakt</a>
+        </nav>
+    </div>
+</footer>
+
+</body>
+</html>
